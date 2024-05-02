@@ -14,26 +14,21 @@ def run_predict() :
     
     st.header('주식가치 예측')
     st.subheader(' : Predicting stock value')
-    st.subheader('2000~2024년 주식데이터를 prophet을 사용하여')
-    st.subheader('미래 1년치 주식가치를 예측합니다')
+    st.text('기업 코드를 입력하여 한 기업의 2000~2024년 주식데이터를 prophet을 사용하여 미래 1년치')
+    st.text('주식가치를 예측합니다 Code를 알지 못한다면 Viewing stock information를 참조하세요')
+    
+    st.header('')
+    code = st.text_input('예측을 원하는 기업의 주식의 Code를 입력하세요   ex)005930')
 
-    code = st.text_input('알고자하는 주식의 Code를 입력하세요 ex)005930')
     if len(code) !=0 :
         st.dataframe(df.iloc[:,1:][code == df['Code']])
         
         df2 = fdr.DataReader(symbol=code) # 2000~2024년 4월까지의 데이터를 불러온다
         df2.reset_index(inplace=True)
         
-        st.dataframe(df2)
-        
         df2 = df2.iloc[ : , [0, 3+1]]
         
-        st.dataframe(df2)
-        
         df2.rename(columns={'Date': 'ds', 'Close': 'y'}, inplace=True)  #ds와 y로 바꾼다
-        
-        st.dataframe(df2)
-        
         
         # 1. 라이브러리를 변수로 만들고
         prophet = Prophet()
