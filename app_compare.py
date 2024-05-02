@@ -17,6 +17,6 @@ def run_compare() :
   
     choice_list = st.multiselect('etf 카테고리를 선택하세요', column_list)
     
-    if len(choice_list) != 0 :
+    if df1[choice_list == df1['Category']] :
 
         st.line_chart(df1)
