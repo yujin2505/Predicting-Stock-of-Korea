@@ -19,7 +19,7 @@ def run_predict() :
 
     code = st.text_input('알고자하는 주식의 Code를 입력하세요 ex)005930')
     if len(code) !=0 :
-        st.dataframe(df[code == df['Code']])
+        st.dataframe(df.iloc[:,1:][code == df['Code']])
         
         df2 = fdr.DataReader(symbol=code) # 2000~2024년 4월까지의 데이터를 불러온다
         df2.reset_index(inplace=True)

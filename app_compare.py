@@ -27,7 +27,7 @@ def run_compare() :
     
     choice = st.selectbox('그룹을 선택하세요', np.arange(1,7+1))
             
-    st.dataframe(etf_list.loc[ etf_list['Category']==choice , ])
+    st.dataframe(etf_list.loc[ : , 'Symbol' : ][ etf_list['Category']==choice , ])
     
     
     st.subheader('Category별 EarningRate의 평균')
