@@ -7,21 +7,24 @@ from PIL import Image #파이썬 이미지 라이브러리 PIL
 
 def main():
     
+    
     menu = ['Home','Viewing stock information','Predicting stock value','Comparing domestic ETF']
     
     choice = st.sidebar.selectbox('메뉴', menu)
     
     if choice == menu[0] :
 
-        st.header('Predicting Stock of Korea Project')
+        st.title('Predicting Stock of Korea Project')
         st.subheader('- 프로젝트 설명-')
         img = Image.open('./stock1.png') 
         st.image(img, use_column_width=True) #width=True해주면 자동으로 폭을 맞춰준다
     
         st.text('국내 주식을 검색하면 보여주고, 기업코드를 입력하면 기업의 미래 1년치 주식가치를 ')
-        st.text('프로펫(prophet)기법을 사용하여 예측하였으며 년,월,주간의 주가 흐름을 그래프로 나타내었습니다 ')
-        st.text('안정적인 리턴(return)을 가져오는 국내 ETF 주식을 이자율(Earning rate)을 중심으로 비교하였습니다')
-        st.text('출처 : FinanceDataReader 라이브러리 2024/04/29 기준 주식정보입니다')
+        st.text('프로펫(prophet)기법을 사용하여 예측하고 년,월,주간의 주가 흐름을 그래프로 나타내었습니다')
+        st.text('비교적 안정적인 리턴(return)을 가져오는 국내 ETF 주식을 ')
+        st.text('이자율(EarningRate)을 중심으로 비교하였습니다')        
+        st.text('2024/04/29 기준 주식 데이터를 사용하였습니다')
+        st.text('데이터 출처 : FinanceDataReader 라이브러리 https://github.com/FinanceData/FinanceDataReader')
         
         st.header('')
         st.header('- 목차 -')
@@ -29,18 +32,18 @@ def main():
         
         st.subheader('1. 주식정보 보기')
         st.subheader(' : Viewing stock information')
-        st.text('주식을 검색하여 정보를 dataset으로 불러옵니다')
+        st.text('기업 Name을 입력받아 기업 주식에 대한 정보를 dataset으로 불러옵니다')
         st.subheader('')
         
         st.subheader('2. 주식가치 예측')
         st.subheader(' : Predicting stock value')
-        st.text('2000~2024년 주식데이터를 prophet을 사용하여')
+        st.text('2000~2024년 주식데이터를 prophet(프로펫) 기법을 사용하여')
         st.text('미래 1년치 주식가치를 예측합니다')
         st.subheader('')
         
         st.subheader('3. 국내 ETF 주식가치비교')
         st.subheader(' : Comparing domestic ETF stock valuations')
-        st.text('안정적인 return을 가져오는 ETF주식을 종목별로 비교합니다')
+        st.text('안정적인 return을 가져오는 국내 ETF주식을 종목별(카테고리별)로 비교합니다')
             
     
     elif choice == menu[1]: 

@@ -12,15 +12,17 @@ def run_predict() :
     df = pd.read_csv('./data.csv')
     df.reset_index(inplace=True, drop=True)
     
-    st.header('주식가치 예측')
+    st.title('주식가치 예측')
     st.subheader(' : Predicting stock value')
     st.text('기업 코드를 입력하여 한 기업의 2000~2024년 주식데이터를 prophet을 사용하여 미래 1년치')
-    st.text('주식가치를 예측합니다 Code를 알지 못한다면 Viewing stock information를 참조하세요')
-    
+    st.text('주식가치를 예측합니다.  Code를 모른다면 Viewing stock information를 참조하세요')
     st.header('')
-    code = st.text_input('예측을 원하는 기업의 주식의 Code를 입력하세요   ex)005930')
+    st.subheader('예측하고자 하는 기업의 Code입력하기')
+    code = st.text_input('기업 Code를 입력하세요      ex)005930')
 
     if len(code) !=0 :
+        
+        st.text('검색한 기업의 주식 정보를 불러옵니다')
         st.dataframe(df.iloc[:,1:][code == df['Code']])
         
         df2 = fdr.DataReader(symbol=code) # 2000~2024년 4월까지의 데이터를 불러온다
@@ -29,6 +31,9 @@ def run_predict() :
         df2 = df2.iloc[ : , [0, 3+1]]
         
         df2.rename(columns={'Date': 'ds', 'Close': 'y'}, inplace=True)  #ds와 y로 바꾼다
+        
+        st.text('Prophet에 적용하기 위해 컬럼명을 ds와 y로 변경하였습니다.')
+        st.dataframe(df2)
         
         # 1. 라이브러리를 변수로 만들고
         prophet = Prophet()
@@ -42,10 +47,15 @@ def run_predict() :
         # 4. 예측을 한다
         forecast = prophet.predict(future)
         
+        st.text('2000~2024년 과거데이터와 prophet을 통해 예측한 2025년 1년치 데이터를 불러옵니다.')
         st.dataframe(forecast)
         
+        st.subheader('과거 데이터와 1년치 예상 주가에 대한 그래프입니다')
         fig1 = prophet.plot(forecast)
         st.pyplot(fig1)
-
+        
+        st.subheader('')
+        
+        st.subheader('기업의 연,월,주간 주가에 대한 예측치 그래프입니다')
         fig2 = prophet.plot_components(forecast)
         st.pyplot(fig2)
