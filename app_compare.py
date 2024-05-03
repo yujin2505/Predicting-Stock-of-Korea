@@ -98,7 +98,7 @@ def run_compare() :
     st.text('그룹별 max값이 높은 기준으로 정렬하였습니다')
     
     
-    fig1 = plt.figure(figsize=(11, 11))
+    fig1 = plt.figure(figsize=(7, 7))
     plt.bar(data=etf_list ,x='Category',height='EarningRate')
     plt.axhline(y=0, color='black')  # y축 진하게
     plt.xticks([1,2,3,4,5,6,7], ['국내시장지수 ETF', '국내업종/테마 ETF', '국내파생', '해외주식', '원자재', '채권', '기타'] ,rotation=45)
