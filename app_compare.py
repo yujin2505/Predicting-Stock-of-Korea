@@ -101,7 +101,7 @@ def run_compare() :
     fig1 = plt.figure(figsize=(11, 11))
     plt.bar(data=etf_list ,x='Category',height='EarningRate')
     plt.axhline(y=0, color='black')  # y축 진하게
-    plt.xticks([1,2,3,4,5,6,7], ['국내시장지수 ETF', '국내업종/테마 ETF', '국내파생', '해외주식', '원자재', '채권', '기타'])
+    plt.xticks([1,2,3,4,5,6,7], ['국내시장지수 ETF', '국내업종/테마 ETF', '국내파생', '해외주식', '원자재', '채권', '기타'] ,rotation=45)
     plt.title('카테고리별 최저,최대 이자율 그래프')
     st.pyplot(fig1)
 
