@@ -90,19 +90,42 @@ def run_compare() :
     else :
         st.dataframe(etf_list.loc[etf_list['Category']==7], width=2000, height=350)
     
-
     
+    st.header('')
+    st.subheader('Category별 최저, 최대 이자율')
     st.header('')
     st.text('최저, 최대 이자율을 알 수 있습니다. 이자율이 마이너스인 경우, 원금보장이 어렵습니다')
     st.text('그룹별 max값이 높은 기준으로 정렬하였습니다')
-    fig = plt.figure(figsize=(7,5))
-    plt.bar(data=etf_list2, x='Category', height='EarningRate')
+    
+    
+    fig1 = plt.figure(figsize=(11, 11))
+    plt.bar(data=etf_list ,x='Category',height='EarningRate')
     plt.axhline(y=0, color='black')  # y축 진하게
-    plt.title('카테고리별 이자율 그래프로 보기')
-    plt.ylabel('이자율')
-    st.pyplot(fig)
+    plt.xticks([1,2,3,4,5,6,7], ['국내시장지수 ETF', '국내업종/테마 ETF', '국내파생', '해외주식', '원자재', '채권', '기타'])
+    plt.title('카테고리별 최저,최대 이자율 그래프')
+    st.pyplot(fig1)
+
     
     st.header('')
     st.subheader('Category별 EarningRate의 평균')
     st.dataframe(etf_list2.sort_values(by='EarningRate',ascending=False))
+    
+    
+    etf_list2 = etf_list2.sort_values('EarningRate',ascending=False)
+    
+    st.header('')
+    st.text('카테고리별 이자율 평균을 높은 순서대로 정렬하였습니다')
+    fig = plt.figure(figsize=(7, 5))
+
+    X = [1, 3, 5, 7, 9, 11, 13]
+
+    plt.bar(X, etf_list2['EarningRate'])
+    plt.axhline(y=0, color='black')  # y축 진하게
+    plt.title('카테고리별 이자율 평균 그래프')
+    plt.ylabel('이자율')
+
+    ticklabel = ['국내시장지수 ETF', '국내업종/테마 ETF', '국내파생', '해외주식', '원자재', '채권', '기타']
+    plt.xticks(X, ticklabel, rotation=45)
+
+    st.pyplot(fig)
 
