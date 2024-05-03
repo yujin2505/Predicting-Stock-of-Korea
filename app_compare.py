@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import seaborn as sb
 
 #그래프 한글화하기
 import platform
@@ -89,19 +90,19 @@ def run_compare() :
     else :
         st.dataframe(etf_list.loc[etf_list['Category']==7], width=2000, height=350)
     
+
     
     st.header('')
-    
     st.text('최저, 최대 이자율을 알 수 있습니다. 이자율이 마이너스인 경우, 원금보장이 어렵습니다')
-    st.text('그룹별 max값이 큰 기준으로 정렬하였습니다.')
+    st.text('그룹별 max값이 높은 기준으로 정렬하였습니다')
     fig = plt.figure(figsize=(7,5))
-    plt.bar(data=etf_list, x='Category', height='EarningRate',color='orange')
-    plt.grid(True)
+    plt.bar(data=etf_list2, x='Category', height='EarningRate')
     plt.axhline(y=0, color='black')  # y축 진하게
     plt.title('카테고리별 이자율 그래프로 보기')
     plt.ylabel('이자율')
     st.pyplot(fig)
     
+    st.header('')
     st.subheader('Category별 EarningRate의 평균')
-    st.dataframe(etf_list2)
+    st.dataframe(etf_list2.sort_values(by='EarningRate',ascending=False))
 
