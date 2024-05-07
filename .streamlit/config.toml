@@ -1,0 +1,4 @@
+[theme]
+primaryColor="skyblue" 			# theme
+secondaryBackgroundColor="skyblue" 		# side bar
+font = "NanumGothic"

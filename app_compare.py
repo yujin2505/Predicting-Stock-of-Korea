@@ -1,4 +1,3 @@
-import FinanceDataReader as fdr
 from PIL import Image #파이썬 이미지 라이브러리 PIL
 import streamlit as st
 import pandas as pd
