@@ -5,6 +5,8 @@ from app_view import run_view
 from app_compare import run_compare
 from streamlit_option_menu import option_menu
 
+st.set_page_config(layout="wide", initial_sidebar_state="expanded")
+
 def main():
         
     menu = ['Project Description','Viewing Stock Information','Predicting Stock Value','Comparing Domestic ETF']

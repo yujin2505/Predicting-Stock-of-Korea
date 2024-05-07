@@ -1,8 +1,6 @@
 import streamlit as st
 from PIL import Image #파이썬 이미지 라이브러리 PIL
 
-st.set_page_config(layout="wide", initial_sidebar_state="expanded")
-
 def run_home() :
 
     col1, col2= st.columns([2.3, 2])
