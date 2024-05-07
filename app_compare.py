@@ -22,7 +22,7 @@ def run_compare() :
     with col2 :
         st.title('Ⅲ. 국내 ETF 주식가치비교')
         st.header(' : Comparing domestic ETF stock valuations')
-        st.text('ETF데이터는 2024/4/29 기준입니다.')
+        st.text('ETF데이터는 2024/4/29 기준 데이터입니다.')
         st.text('ETF는 하나의 주식으로 거래되지만 여러 자산에 대한 소유권을 가질 수 있게 해줍니다.')
         st.text('쉽게 말하면 여러 채권과 주식, 자산을 담고있는 하나의 상자로 표현됩니다.')
         st.text('주식은 분산투자하는 경우, risk가 서로 상쇄되어 안전성이 높아지기 때문에')
