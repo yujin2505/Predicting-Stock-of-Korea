@@ -106,7 +106,7 @@ def run_compare() :
         plt.grid(True)
         plt.bar(data=etf_list ,x='Category',height='EarningRate', width=0.7, color='green')
         plt.axhline(y=0, color='black')  # y축 진하게
-        plt.xticks([1,2,3,4,5,6,7], ['국내시장지수 ETF', '국내업종/테마 ETF', '국내파생', '해외주식', '원자재', '채권', '기타'] ,rotation=45)
+        plt.xticks([2,4,5,3,1,7,6], ['국내업종/테마 ETF','해외주식','원자재','국내파생','국내시장지수 ETF','기타','채권'] ,rotation=45)
         plt.title('카테고리별 최저,최대 이자율 그래프')
         plt.ylabel('이자율')
         st.pyplot(fig1)
