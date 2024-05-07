@@ -10,6 +10,7 @@ def run_home() :
     with col1 :
         st.title('Predicting Stock of Korea Project')
         st.subheader('- 프로젝트 설명-')
+        st.subheader(' ')
         st.text('데이터 출처: FinanceDataReader라이브러리 https://github.com/FinanceData/FinanceDataReader')
         st.text('2024/04/29기준 데이터입니다')
         st.subheader(' ')
