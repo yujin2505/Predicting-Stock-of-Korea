@@ -1,9 +1,9 @@
 import FinanceDataReader as fdr
 import streamlit as st
 import pandas as pd
-df = fdr.StockListing('KRX')
-
 from PIL import Image #파이썬 이미지 라이브러리 PIL
+
+df = fdr.StockListing('KRX')
 
 def run_view() :
     

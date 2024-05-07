@@ -28,7 +28,7 @@ def run_compare() :
         st.text('주식은 분산투자하는 경우, risk가 서로 상쇄되어 안전성이 높아지기 때문에')
         st.text('그 자체로 분산투자가 가능한 ETF는 원금상실위험이 적은 안전한 투자대상으로 평가됩니다')
         
-        etf_list = pd.read_csv('KRETF.csv')
+        etf_list = pd.read_csv('./KRETF.csv')
 
         st.header('')
         st.subheader('이자율(EarningRate) 높은 순서로 보기')

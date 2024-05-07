@@ -12,7 +12,7 @@ def run_home() :
         st.subheader('- 프로젝트 설명-')
         st.subheader(' ')
         st.text('데이터 출처: FinanceDataReader라이브러리 https://github.com/FinanceData/FinanceDataReader')
-        st.text('현재시각을 기점으로 라이브러리에서 데이터를 불러와 실시간으로 데이터를 반영합니다')
+        st.text('2024/04/29기준 데이터입니다')
         st.subheader(' ')
         st.text('국내 주식을 검색하면 보여주고, 기업코드를 입력하면 기업의 미래 1년치 주식가치를 ')
         st.text('프로펫(prophet)기법을 사용하여 예측하고 년,월,주간의 주가 흐름을 그래프로 나타내었습니다')
