@@ -36,7 +36,7 @@ def run_home() :
         
         st.subheader('Ⅱ. 주식가치 예측')
         st.subheader(' : Predicting stock value')
-        st.text('2000~2024년 주식데이터를 prophet(프로펫) 기법을 사용하여')
+        st.text('주식데이터를 prophet(프로펫) 기법을 사용하여')
         st.text('미래 1년치 주식가치를 예측합니다')
         st.subheader('')
         

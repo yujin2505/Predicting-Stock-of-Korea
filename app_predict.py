@@ -53,7 +53,7 @@ def run_predict() :
             st.text('현재시각 기준으로 1년치 데이터를 예측합니다.')
             st.dataframe(forecast)
             
-            st.subheader('현재 시각 기준 20년치 데이터와 1년치 예상 주가에 대한 그래프입니다')
+            st.subheader('현재 시각 기준 데이터와 1년치 예상 주가에 대한 그래프입니다')
             fig1 = prophet.plot(forecast)
             st.pyplot(fig1)
             
