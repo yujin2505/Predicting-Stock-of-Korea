@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 from PIL import Image #파이썬 이미지 라이브러리 PIL
 
-df = fdr.StockListing('KRX')
+df = pd.read_csv('./data.csv')
 
 def run_view() :
     

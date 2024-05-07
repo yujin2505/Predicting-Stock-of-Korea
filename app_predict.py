@@ -12,7 +12,7 @@ def run_predict() :
     col1, col2, col3 = st.columns([1, 2.5, 1])
     
     with col2 :
-        df = fdr.StockListing('KRX')
+        df = pd.read_csv('./data.csv')
         df.reset_index(inplace=True, drop=True)
         
         st.title('Ⅱ. 주식가치 예측')
