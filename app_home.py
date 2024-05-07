@@ -1,0 +1,48 @@
+import streamlit as st
+from PIL import Image #파이썬 이미지 라이브러리 PIL
+
+st.set_page_config(layout="wide", initial_sidebar_state="expanded")
+
+def run_home() :
+
+    col1, col2= st.columns([2.3, 2])
+    
+    with col1 :
+        st.title('Predicting Stock of Korea Project')
+        st.subheader('- 프로젝트 설명-')
+        st.subheader(' ')
+        st.text('데이터 출처: FinanceDataReader라이브러리 https://github.com/FinanceData/FinanceDataReader')
+        st.text('현재시각을 기점으로 라이브러리에서 데이터를 불러와 실시간으로 데이터를 반영합니다')
+        st.subheader(' ')
+        st.text('국내 주식을 검색하면 보여주고, 기업코드를 입력하면 기업의 미래 1년치 주식가치를 ')
+        st.text('프로펫(prophet)기법을 사용하여 예측하고 년,월,주간의 주가 흐름을 그래프로 나타내었습니다')
+        st.text('비교적 안정적인 리턴(return)을 가져오는 국내 ETF 주식을 ')
+        st.text('이자율(EarningRate)을 중심으로 비교하였습니다')        
+    
+        st.subheader(' ')
+        img = Image.open('./stock1.png') 
+        st.image(img, width=650)
+            
+    with col2 :
+        st.header(' ')
+        st.header(' ')
+        st.header(' ')
+        st.header(' ')
+        st.header('- 목차 -')
+        st.subheader('')
+        
+        st.subheader('Ⅰ. 주식정보 보기')
+        st.subheader(' : Viewing stock information')
+        st.text('기업 Name을 입력받아 기업 주식에 대한 정보를 dataset으로 불러옵니다')
+        st.subheader('')
+        
+        st.subheader('Ⅱ. 주식가치 예측')
+        st.subheader(' : Predicting stock value')
+        st.text('2000~2024년 주식데이터를 prophet(프로펫) 기법을 사용하여')
+        st.text('미래 1년치 주식가치를 예측합니다')
+        st.subheader('')
+        
+        st.subheader('Ⅲ. 국내 ETF 주식가치비교')
+        st.subheader(' : Comparing domestic ETF stock valuations')
+        st.text('안정적인 return을 가져오는 국내 ETF주식을 종목별(카테고리별)로 비교합니다')
+            
