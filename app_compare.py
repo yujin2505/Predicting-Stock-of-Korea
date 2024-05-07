@@ -96,22 +96,35 @@ def run_compare() :
         
         
         st.header('')
+        st.header('')
         st.subheader('Category별 최저, 최대 이자율')
         st.header('')
         st.text('최저, 최대 이자율을 알 수 있습니다. 이자율이 마이너스인 경우, 원금보장이 어렵습니다')
-        st.text('그룹별 max값이 높은 기준으로 정렬하였습니다')
+
+
+        etf_list3 = etf_list.groupby('Category')['EarningRate'].max().reset_index()
+        etf_list3['Category_Name'] = etf_list2['Category_Name']
+        etf_list3 = etf_list3.sort_values('EarningRate',ascending=False)
+        etf_list3 = etf_list3[['Category','Category_Name','EarningRate']]
+        st.dataframe(etf_list3)
         
+        etf_list4 = etf_list.groupby('Category')['EarningRate'].min().reset_index()
+        etf_list4['Category_Name'] = etf_list2['Category_Name']
+        etf_list4 = etf_list4.sort_values('EarningRate')
+        etf_list4 = etf_list4[['Category','Category_Name','EarningRate']]
+        st.dataframe(etf_list4)
         
         fig1 = plt.figure(figsize=(6,6))
         plt.grid(True)
-        plt.bar(data=etf_list ,x='Category',height='EarningRate', width=0.7, color='green')
+        plt.bar(data=etf_list ,x='Category',height='EarningRate', width=0.6, color='pink')
         plt.axhline(y=0, color='black')  # y축 진하게
-        plt.xticks([2,4,5,3,1,7,6], ['국내업종/테마 ETF','해외주식','원자재','국내파생','국내시장지수 ETF','기타','채권'] ,rotation=45)
+        plt.xticks([2,4,5,3,1,7,6],['국내업종/테마 ETF','해외주식','원자재','국내파생','국내시장지수 ETF','기타','채권'],rotation=45)
         plt.title('카테고리별 최저,최대 이자율 그래프')
         plt.ylabel('이자율')
         st.pyplot(fig1)
 
         
+        st.header('')
         st.header('')
         st.subheader('Category별 EarningRate의 평균')
         st.dataframe(etf_list2.sort_values(by='EarningRate',ascending=False))
@@ -131,7 +144,7 @@ def run_compare() :
         plt.ylabel('이자율 평균')
         plt.grid(True)
         
-        ticklabel = ['국내시장지수 ETF', '국내업종/테마 ETF', '국내파생', '해외주식', '원자재', '채권', '기타']
+        ticklabel = ['국내시장지수 ETF', '국내업종/테마 ETF', '해외주식', '원자재', '기타', '국내파생', '채권']
         plt.xticks(X, ticklabel, rotation=45)
 
         st.pyplot(fig)
