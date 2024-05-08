@@ -12,7 +12,8 @@ def run_home() :
         
         st.title('Predicting Stock of Korea')
         st.subheader(' ')
-        st.text('데이터 출처: FinanceDataReader라이브러리 https://github.com/FinanceData/FinanceDataReader')
+        st.text('데이터 출처: FinanceDataReader라이브러리')
+        st.page_link('https://github.com/FinanceData/FinanceDataReader')
         st.text('데이터는 라이브러리에서 실시간으로 반영됩니다!')
         st.subheader(' ')
         st.text('국내 주식을 검색하면 보여주고, 기업코드를 입력하면 기업의 미래 1년치 주식가치를 ')
