@@ -155,8 +155,10 @@ def run_compare() :
         st.header('')
         
         # 6-(1) Category별 이자율 평균의 데이터프레임 출력
-        st.dataframe(etf_list2.sort_values(by='EarningRate',ascending=False))
+        etf_list2.sort_values(by='EarningRate',ascending=False, inplace=True)
+        st.dataframe(etf_list2)
         st.text('카테고리별 이자율 평균을 높은 순서대로 정렬하였습니다')
+        
         
         # 6-(2) Category별 이자율 평균의 그래프 출력
         fig = plt.figure(figsize=(6,6))
