@@ -16,7 +16,6 @@ def run_home() :
         st.text('프로펫(prophet)기법을 사용하여 예측하고 년,월,주간의 주가 흐름을 그래프로 나타내었습니다')
         st.text('비교적 안정적인 리턴(return)을 가져오는 국내 ETF 주식을 ')
         st.text('이자율(EarningRate)을 중심으로 비교하였습니다')        
-    
         st.subheader(' ')
         img = Image.open('./stock1.png') 
         st.image(img, width=650)
