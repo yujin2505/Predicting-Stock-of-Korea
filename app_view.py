@@ -19,7 +19,7 @@ def run_view() :
 
         # 전체 데이터보기
         if st.button(label='전체 데이터보기') :
-            st.dataframe(df.iloc[:,1:], width=2000, height=550)
+            st.dataframe(df, width=2000, height=550)
         
         st.header('')
         st.subheader('컬럼(columns)에 대한 설명입니다')
@@ -32,6 +32,6 @@ def run_view() :
 
     # 데이터 검색하면 데이터프레임 출력하게하기
     new_data = st.text_input('주식의 Name을 입력해주세요 ex)삼성, 현대')
-    st.dataframe(df.iloc[:,1:][df['Name'].str.contains(new_data)], width=2000, height=450)
+    st.dataframe(df.loc[df['Name'].str.contains(new_data)], width=2000, height=450)
         
     

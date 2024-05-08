@@ -26,15 +26,20 @@ def run_predict() :
         st.text('주식가치를 예측합니다.  Code를 모른다면 Viewing stock information를 참조하세요')
         st.header('')
         st.subheader('예측하고자 하는 기업의 Code입력하기')
-        code = st.text_input('기업 Code를 입력하세요 ex)005930')
+        code = st.text_input('기업 Code를 입력하세요')
 
 
         # 3. 코드를 입력받아 출력하는
         
         if len(code) !=0 :
             
+            if len(code) > 6 :   # ISU_CD로 입력받았을 때
+                code = code[-9:-4+1]
+            else :
+                code = code
+
             st.text('검색한 기업의 주식 정보를 불러옵니다')
-            st.dataframe(df.iloc[:,1:][code == df['Code']])
+            st.dataframe(df.loc[code == df['Code']])
             
             
             # 3-(1) 입력한 코드가 라이브러리의 symbol이라는 컬럼과 일치하는 행을 가져온다
