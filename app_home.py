@@ -12,7 +12,7 @@ def run_home() :
         
         st.title('Predicting Stock of Korea')
         st.subheader(' ')
-        st.text('데이터 출처: FinanceDataReader라이브러리')
+        st.text('데이터 출처 : FinanceDataReader라이브러리')
         st.page_link('https://github.com/FinanceData/FinanceDataReader',label='데이터출처 바로가기')
         st.text('데이터는 라이브러리에서 실시간으로 반영됩니다!')
         st.subheader(' ')
