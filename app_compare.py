@@ -14,9 +14,24 @@ if platform.system() == 'Linux':
 
 def run_compare() :
 
-    col1, col2, col3 = st.columns([1, 2.5, 1])
+    #그래프 한글화하기
+    plt.rcParams['axes.unicode_minus'] = False
+    if platform.system() == 'Linux':
+        rc('font', family='NanumGothic')
+    elif platform.system() == 'Windows':
+        font_path = "c:\Windows\Fonts\BATANG.TTC"  # 한글 폰트 파일 경로 지정하기
+        font_name = font_manager.FontProperties(fname=font_path).get_name()
+        rc('font', family=font_name)
+    
+    
+    col1, col2, col3 = st.columns([1, 2.5, 1])  # 화면을 가운데 정렬하기 위함이다
     
     with col2 :
+        
+        # 1. 데이터 불러오기
+        etf_list = pd.read_csv('./KRETF.csv')
+        
+        # 2. 전체 설명하기
         st.title('Ⅲ. 국내 ETF 주식가치비교')
         st.header(' : Comparing domestic ETF stock valuations')
         st.text('ETF데이터는 2024/4/29 기준 데이터입니다.')
@@ -24,37 +39,29 @@ def run_compare() :
         st.text('쉽게 말하면 여러 채권과 주식, 자산을 담고있는 하나의 상자로 표현됩니다.')
         st.text('주식은 분산투자하는 경우, risk가 서로 상쇄되어 안전성이 높아지기 때문에')
         st.text('그 자체로 분산투자가 가능한 ETF는 원금상실위험이 적은 안전한 투자대상으로 평가됩니다')
-        
-        etf_list = pd.read_csv('./KRETF.csv')
-
         st.header('')
+        
+        
+        # 3. 이자율 높은 순서로 데이터프레임 화면에 표시
         st.subheader('이자율(EarningRate) 높은 순서로 보기')
         st.text('이자율(EarningRate)은 일정 기간 동안 얻는 수입이나 수익의 속도를 나타내는 지표입니다.')
         
-        # etf_list DataFrame에서 'EarningRate' 열을 내림차순으로 정렬
+        # 3-(1) etf_list DataFrame에서 'EarningRate' 열을 내림차순으로 정렬
         etf_list = etf_list.sort_values(by='EarningRate', ascending=False)
 
-        # 정렬된 DataFrame을 streamlit의 st.dataframe()에 전달
+        # 3-(2) 정렬된 DataFrame을 streamlit의 st.dataframe()에 전달
         etf_list = etf_list.iloc[:,[2,3,4,6,7,9]]
+        
+        # 3-(3) 화면에 표시
         st.dataframe(etf_list)
         
+
+        # 4. ETF 카테고리별 이자율 보기
         st.header('')
         st.header('# ETF 카테고리별 이자율 보기')
         st.header('')
         
-        etf_list2 = etf_list.groupby('Category')['EarningRate'].mean().reset_index()
-        etf_list2.dropna(inplace=True)
-        
-        etf_list2.loc[etf_list2['Category'] == 1, 'Category_Name'] = '국내시장지수 ETF'
-        etf_list2.loc[etf_list2['Category'] == 2, 'Category_Name'] = '국내업종/테마 ETF'
-        etf_list2.loc[etf_list2['Category'] == 3, 'Category_Name'] = '국내파생'
-        etf_list2.loc[etf_list2['Category'] == 4, 'Category_Name'] = '해외주식'
-        etf_list2.loc[etf_list2['Category'] == 5, 'Category_Name'] = '원자재'
-        etf_list2.loc[etf_list2['Category'] == 6, 'Category_Name'] = '채권'
-        etf_list2.loc[etf_list2['Category'] == 7, 'Category_Name'] = '기타'
-
-        etf_list2 = etf_list2[['Category','Category_Name','EarningRate']]
-        
+        # 4-(1) 카테고리에 대한 설명
         st.subheader('1. 국내시장지수 ETF')
         st.text('국내시장지수 ETF는 우리나라 증시를 추종하는 ETF입니다')
         st.subheader('2. 국내업종/테마 ETF')
@@ -75,6 +82,21 @@ def run_compare() :
         st.text('달러가격 상승 또는 일본엔화의 상승을 예상한다면 투자할 수 있는 상품들입니다')
         st.header('')
         
+        
+        # 4-(2) 셀렉트박스 만들어서 컬럼 클릭하면 컬럼별 데이터 출력하게하기
+        etf_list2 = etf_list.groupby('Category')['EarningRate'].mean().reset_index()
+        etf_list2.dropna(inplace=True)
+        
+        etf_list2.loc[etf_list2['Category'] == 1, 'Category_Name'] = '국내시장지수 ETF'
+        etf_list2.loc[etf_list2['Category'] == 2, 'Category_Name'] = '국내업종/테마 ETF'
+        etf_list2.loc[etf_list2['Category'] == 3, 'Category_Name'] = '국내파생'
+        etf_list2.loc[etf_list2['Category'] == 4, 'Category_Name'] = '해외주식'
+        etf_list2.loc[etf_list2['Category'] == 5, 'Category_Name'] = '원자재'
+        etf_list2.loc[etf_list2['Category'] == 6, 'Category_Name'] = '채권'
+        etf_list2.loc[etf_list2['Category'] == 7, 'Category_Name'] = '기타'
+
+        etf_list2 = etf_list2[['Category','Category_Name','EarningRate']]
+        
         choice = st.selectbox('카테고리를 선택하세요', etf_list2['Category_Name'])
         
         if choice == '국내시장지수 ETF' :
@@ -93,25 +115,29 @@ def run_compare() :
             st.dataframe(etf_list.loc[etf_list['Category']==7], width=2000, height=350)
         
         
+        
+        # 5. 카테고리별 최저, 최대 이자율
         st.header('')
         st.header('')
         st.subheader('Category별 최저, 최대 이자율')
         st.header('')
         st.text('최저, 최대 이자율을 알 수 있습니다. 이자율이 마이너스인 경우, 원금보장이 어렵습니다')
 
-
+        # 5-(1) max() 사용하여 최대 이자율 데이터프레임 출력
         etf_list3 = etf_list.groupby('Category')['EarningRate'].max().reset_index()
         etf_list3['Category_Name'] = etf_list2['Category_Name']
         etf_list3 = etf_list3.sort_values('EarningRate',ascending=False)
         etf_list3 = etf_list3[['Category','Category_Name','EarningRate']]
         st.dataframe(etf_list3)
         
+        # 5-(2) min() 사용하여 최저 이자율 데이터프레임 출력
         etf_list4 = etf_list.groupby('Category')['EarningRate'].min().reset_index()
         etf_list4['Category_Name'] = etf_list2['Category_Name']
         etf_list4 = etf_list4.sort_values('EarningRate')
         etf_list4 = etf_list4[['Category','Category_Name','EarningRate']]
         st.dataframe(etf_list4)
         
+        # 5-(3) 최대, 최저 이자율 그래프 출력
         fig1 = plt.figure(figsize=(6,6))
         plt.grid(True)
         plt.bar(data=etf_list ,x='Category',height='EarningRate', width=0.6, color='pink')
@@ -122,28 +148,29 @@ def run_compare() :
         st.pyplot(fig1)
 
         
+        # 6. Category별 이자율 평균 그래프 표시하기
         st.header('')
         st.header('')
         st.subheader('Category별 EarningRate의 평균')
-        st.dataframe(etf_list2.sort_values(by='EarningRate',ascending=False))
-        
-        
-        etf_list2 = etf_list2.sort_values('EarningRate',ascending=False)
-        
         st.header('')
+        
+        # 6-(1) Category별 이자율 평균의 데이터프레임 출력
+        st.dataframe(etf_list2.sort_values(by='EarningRate',ascending=False))
         st.text('카테고리별 이자율 평균을 높은 순서대로 정렬하였습니다')
+        
+        # 6-(2) Category별 이자율 평균의 그래프 출력
         fig = plt.figure(figsize=(6,6))
-
-        X = [1, 3, 5, 7, 9, 11, 13]
-
+        
+        X = [1, 3, 5, 7, 9, 11, 13]  # X 간격 설정
+        
+        plt.title('카테고리별 이자율 평균 그래프')
         plt.bar(X, etf_list2['EarningRate'], width=1.25, color='orange')
         plt.axhline(y=0, color='black')  # y축 진하게
-        plt.title('카테고리별 이자율 평균 그래프')
-        plt.ylabel('이자율 평균')
         plt.grid(True)
+        plt.ylabel('이자율 평균')   
         
-        ticklabel = ['국내시장지수 ETF', '국내업종/테마 ETF', '해외주식', '원자재', '기타', '국내파생', '채권']
+        ticklabel = ['국내시장지수 ETF', '국내업종/테마 ETF', '해외주식', '원자재', '기타', '국내파생', '채권'] # 라벨 1234567에서 바꾸기
         plt.xticks(X, ticklabel, rotation=45)
-
+        
         st.pyplot(fig)
 

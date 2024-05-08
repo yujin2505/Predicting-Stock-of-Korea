@@ -2,10 +2,14 @@ import streamlit as st
 from PIL import Image #파이썬 이미지 라이브러리 PIL
 
 def run_home() :
-
-    col1, col2= st.columns([2.3, 2])
+    
+    # 화면을 2분할 하여 스크롤을 내리지 않고 함께 출력하게 할 것이다
+    col1, col2= st.columns([2.3, 2])  
     
     with col1 :
+        
+        # 전체 프로젝트에 대한 설명
+        
         st.title('Predicting Stock of Korea Project')
         st.subheader('- 프로젝트 설명-')
         st.subheader(' ')
@@ -17,10 +21,16 @@ def run_home() :
         st.text('비교적 안정적인 리턴(return)을 가져오는 국내 ETF 주식을 ')
         st.text('이자율(EarningRate)을 중심으로 비교하였습니다')        
         st.subheader(' ')
-        img = Image.open('./stock1.png') 
+        
+        # 메인 화면에 넣을 사진
+        img = Image.open('./stock1.png')  
         st.image(img, width=650)
             
+            
     with col2 :
+        
+        # 목차
+        
         st.header(' ')
         st.header(' ')
         st.header(' ')
