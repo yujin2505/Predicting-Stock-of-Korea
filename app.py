@@ -12,6 +12,7 @@ def main():
     menu = ['Project Description','Viewing Stock Information','Predicting Stock Value','Comparing Domestic ETF']
     
     with st.sidebar :
+        st.write('오유진 개인 프로젝트')
         choice = option_menu(' ',menu,
                              icons=["house",'bi bi-search',"bi bi-graph-up-arrow","bi bi-file-earmark-bar-graph"] , menu_icon="bi bi-buildings", default_index=0,
                             )
