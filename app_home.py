@@ -10,8 +10,8 @@ def run_home() :
         
         # 전체 프로젝트에 대한 설명
         
-        st.title('Predicting Stock of Korea Project')
-        st.subheader('- 프로젝트 설명-')
+        st.title('Predicting Stock of Korea')
+        st.subheader('- 설명-')
         st.subheader(' ')
         st.text('데이터 출처: FinanceDataReader라이브러리 https://github.com/FinanceData/FinanceDataReader')
         st.text('데이터는 라이브러리에서 실시간으로 반영됩니다!')
