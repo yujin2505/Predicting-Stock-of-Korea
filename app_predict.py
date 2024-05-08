@@ -2,7 +2,6 @@ import FinanceDataReader as fdr
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import seaborn as sns
 from prophet import Prophet
 import streamlit as st
 

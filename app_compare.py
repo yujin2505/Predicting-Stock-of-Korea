@@ -2,8 +2,6 @@ from PIL import Image #파이썬 이미지 라이브러리 PIL
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
-import seaborn as sb
 
 #그래프 한글화하기
 import platform
