@@ -15,7 +15,7 @@ https://codebunny99.tistory.com/category/Project
 블로그에 작성하였습니다.
 
 ### 핵심기술
-prophet library
+prophet 프로펫
 
 ### 데이터출처
 FinanceDataReader라이브러리
